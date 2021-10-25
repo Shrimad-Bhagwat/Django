@@ -1,21 +1,34 @@
-# Django Tutorial notes 
-
+# Django notes 
+### Contents
+- [Django Setup](#1-django-setup)
+- [First App](#2-first-app)
+---
 ## 1. [Django Setup]()
 Python installation required.
 ### Install Virtual Environment
-  `pip install virtualenv`
+  ```
+  pip install virtualenv
+  ```
   
 ### Activate Virtual Environment
-  `./env/Scripts/activate`
+  ```
+  ./env/Scripts/activate
+  ```
 
 ### Install django using pip
-  `pip install django`
+  ```
+  pip install django
+  ```
 
 ### Confirm django installation
-  `django-admin --version`
+  ```
+  django-admin --version
+  ```
 
 ### Creating Project
-`django-admin startproject djangoproject`
+```
+django-admin startproject djangoproject
+```
 
 `cd djangoproject`
 
@@ -31,7 +44,9 @@ djangoproject
 ```
 
 ### Starting the Development Server
-`python manage.py runserver`
+```
+python manage.py runserver
+```
 
 **Result :**
 
@@ -49,7 +64,7 @@ To Stop the Server
 
 ![Django Successful](./images/django-successful.png)
 
-
+---
 ## 2. [First App]()
 
 ### Create a New App
@@ -76,25 +91,27 @@ After creating a new app we have to create a new file in it called `urls.py`. It
 We have to include this file's urls in the project's urls file.
 
 > djangoproject / **djangoproject / urls.py**
+```
+from django.contrib import admin
+from django.urls import path, include
 
-> from django.contrib import admin
-> from django.urls import path,  **include**
-> 
-> urlpatterns = [
->     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path('admin/', admin.site.urls),
->     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **path( ' ', include('myapp.urls'),**
-> ]
+urlpatterns = [
+    path('admin/', admin.site.urls), 
+    path('', include('myapp.urls'),
+]
+```
 
 Now we need to add new urls in the `urls.py` file of `myapp`.
 
 > djangoproject / **myapp / urls.py**
+```
+from django.urls import path
+from . import views
 
-> **from django.urls import path**
-> **from . import views**
-> 
-> **urlpatterns = [**
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  **path(' ', views.home, name='home'),**
-> **]**
+urlpatterns = [ 
+    path('', views.home, name='home'), 
+] 
+```
 
 In this file we have imported views.
 And created a path for Home page.
@@ -104,12 +121,13 @@ And created a path for Home page.
 **Now we have to create view for this path in the `views.py`**
 
 > djangoproject / **myapp / views.py**
+```
+from django.shortcuts import render
+rom django.http import HttpResponse
 
-> **from django.shortcuts import render**
-> **rom django.http import HttpResponse**
-> 
-> **def home(request):**
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    **return HttpResponse("`<h1>Hello World!</h1>`")>** 
+def home(request):
+    return HttpResponse("<h1>Hello World!</h1>")> 
+```
 
 Save all the files and open **http://127.0.0.1:8000/**
 
