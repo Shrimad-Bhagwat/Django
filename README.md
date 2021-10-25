@@ -1,4 +1,19 @@
-# Django notes 
+<div align="center" >
+
+<h1> Django Guide</h1>
+
+<p float="left">
+  
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
+
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+
+</p>
+
+
+</div>
+
 ### Contents
 - [Django Setup](#1-django-setup)
 - [First App](#2-first-app)
