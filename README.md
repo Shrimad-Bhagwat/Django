@@ -15,12 +15,56 @@
 
 </div>
 
-### Contents
-- [Django Setup](#1-django-setup)
-- [First App](#2-first-app)
-- [Django Template Language](#3-django-template-language)
-- [GET vs POST](#4-get-vs-post)
-- [Model View Template](#5-model-view-template)
+
+<details open>
+<summary> Contents </summary>
+<br>
+
+- [1. Django Setup](#1-django-setup)
+  - [Install Virtual Environment](#install-virtual-environment)
+  - [Activate Virtual Environment](#activate-virtual-environment)
+  - [Install django using pip](#install-django-using-pip)
+  - [Confirm django installation](#confirm-django-installation)
+  - [Creating Project](#creating-project)
+  - [Starting the Development Server](#starting-the-development-server)
+- [2. First App](#2-first-app)
+  - [Create a New App](#create-a-new-app)
+  - [Adding urls](#adding-urls)
+  - [Creating views](#creating-views)
+- [**Congratulations! You have created your first Django App**](#congratulations-you-have-created-your-first-django-app)
+  - [**How do we get this ?**](#how-do-we-get-this-)
+- [3. Django Template Language](#3-django-template-language)
+  - [Creating templates folder](#creating-templates-folder)
+  - [Adding templates](#adding-templates)
+  - [Dynamic Content](#dynamic-content)
+  - [Adding Base Template](#adding-base-template)
+- [4. GET vs POST](#4-get-vs-post)
+  - [Creating a Form](#creating-a-form)
+- [5. Model View Template](#5-model-view-template)
+
+- [1. Django Setup](#1-django-setup)
+  - [Install Virtual Environment](#install-virtual-environment)
+  - [Activate Virtual Environment](#activate-virtual-environment)
+  - [Install django using pip](#install-django-using-pip)
+  - [Confirm django installation](#confirm-django-installation)
+  - [Creating Project](#creating-project)
+  - [Starting the Development Server](#starting-the-development-server)
+- [2. First App](#2-first-app)
+  - [Create a New App](#create-a-new-app)
+  - [Adding urls](#adding-urls)
+  - [Creating views](#creating-views)
+- [**Congratulations! You have created your first Django App**](#congratulations-you-have-created-your-first-django-app)
+  - [**How do we get this ?**](#how-do-we-get-this-)
+- [3. Django Template Language](#3-django-template-language)
+  - [Creating templates folder](#creating-templates-folder)
+  - [Adding templates](#adding-templates)
+  - [Dynamic Content](#dynamic-content)
+  - [Adding Base Template](#adding-base-template)
+- [4. GET vs POST](#4-get-vs-post)
+  - [Creating a Form](#creating-a-form)
+- [5. Model View Template](#5-model-view-template)
+
+</details>
 
 ---
 ## 1. [Django Setup](#1-django-setup)
