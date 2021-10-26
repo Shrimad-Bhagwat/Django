@@ -41,6 +41,14 @@
 - [4. GET vs POST](#4-get-vs-post)
   - [Creating a Form](#creating-a-form)
 - [5. Model View Template](#5-model-view-template)
+- [6. Static Files](#6-static-files)
+  - [Create a new App](#create-a-new-app-1)
+  - [Add urls.py](#add-urlspy)
+  - [Modify views.py](#modify-viewspy)
+  - [Modify djangoproject's urls.py](#modify-djangoprojects-urlspy)
+  - [Static Folder](#static-folder)
+  - [Add Static Dirs and Root](#add-static-dirs-and-root)
+  - [Edit Links and Load Static](#edit-links-and-load-static)
 
 </details>
 
@@ -441,3 +449,115 @@ def add(request):
 
 ---
 
+## 6. [Static Files](#6-static-files)
+
+### Create a new App
+
+```
+python manage.py startapp simple_house
+```
+
+Created a new app called `simple_house`.
+
+
+```
+djangoproject
+  |__ djangoproject
+  |__ myapp
+  |__ simple_house
+  |     |__ init.py
+  |     |__ admin.py
+  |     |__ apps.py
+  |     |__ models.py
+  |     |__ tests.py
+  |     |__ views.py
+  |__ templates
+  |__ manage.py
+```
+
+### Add urls.py 
+
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('',views.index,name='index'),
+]
+```
+Create path for index at `''`.
+
+### Modify views.py
+
+```
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    return render(request, 'index.html')
+```
+Create view for index and render `index.html`.
+
+Add a new `index.html` file in the templates folder.
+
+### Modify djangoproject's urls.py
+
+```
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('simple_house.urls')),
+]
+```
+Change the `''` path to include `urls` from `simple_house`.
+
+### Static Folder
+
+Create a Static Folder and add all your static files in it. For example, css, images, js etc.
+
+```
+djangoproject
+  |__ djangoproject
+  |__ myapp
+  |__ simple_house
+  |__ static
+  |__ templates
+  |__ manage.py
+```
+### Add Static Dirs and Root
+In the `djangoproject/settings.py` add
+```
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+```
+
+And then run
+```
+python manage.py collectstatic
+```
+to (auto)create a folder named `assets` for all the staticfiles.
+
+### Edit Links and Load Static
+In the `index.html` add 
+`{% load static %}` at the top of the file and change all the links in the following format.
+```
+<link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet" />
+```
+ `{% static 'link' %}`
+
+where link is the actual link of the file.
+
+Do this for all the css, js, images etc.
+
+Now you can see the website with all the static content displayed properly.
+<div align='center'>
+
+![Static Files Simple House](images/static-files-simple-house.png)
+
+![Static Files Simple House](images/static-files-simple-house-2.png)
+
+![Static Files Simple House](images/static-files-simple-house-3.png)
+
+</div>
