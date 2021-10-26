@@ -10,6 +10,7 @@
     <title>Simple House Template</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />    
 	<link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <!--
 
@@ -68,12 +69,17 @@ https://templatemo.com/tm-539-simple-house
 					{% for dish in dishes %}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
-							<img src="{{baseUrl}}/gallery/{{dish.img}}" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">{{dish.name}}</h4>
-								<p class="tm-gallery-description">{{dish.desc}}</p>
-								<p class="tm-gallery-price">${{dish.price}}</p>
-							</figcaption>
+							<div class="cont">
+								<img class='image' src="{{baseUrl}}/gallery/{{dish.img}}" alt="Image" class="img-fluid tm-gallery-img" />
+								{% if dish.discount %}
+									<div class="top-left disc">Discount</div>
+								{% endif %}
+								<figcaption>
+									<h4 class="tm-gallery-title">{{dish.name}}</h4>
+									<p class="tm-gallery-description">{{dish.desc}}</p>
+									<p class="tm-gallery-price">${{dish.price}}</p>
+								</figcaption>
+							</div>
 						</figure>
 					</article>
 					{% endfor %}

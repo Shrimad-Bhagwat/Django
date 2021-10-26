@@ -7,3 +7,4 @@ class Dish(models.Model):
     img : str
     desc : str
     price : int
+    discount : bool

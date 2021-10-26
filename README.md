@@ -55,6 +55,7 @@
 - [8. Models](#8-models)
   - [Displaying passed data](#displaying-passed-data)
   - [Passing Multiple Data](#passing-multiple-data)
+  - [Using Condition](#using-condition)
 
 </details>
 
@@ -721,3 +722,56 @@ In `index.html` create a for loop for the format code of a Dish like :
 In this way every object will be displayed using the same code.
 
 ![Multiple Data](images/multiple-data.png)
+
+### Using Condition
+
+We can modify the model to add new field `discount` on the `Dish`.
+
+`simple_house / models.py`
+
+```
+class Dish(models.Model):
+    id : int
+    name : str
+    img : str
+    desc : str
+    price : int
+    discount : bool
+```
+Adding it to every Dish in `views.py` like this.
+
+```
+ dish1 = Dish()
+    dish1.name = "Salad"
+    dish1.desc = "A mixture of raw usually green leafy vegetables (as lettuce) combined with other vegetables (as tomato and cucumber) and served with a dressing."
+    dish1.price = 10
+    dish1.img = '01.jpg'
+    dish1.discount = False
+
+    dish2 = Dish()
+    dish2.name = "Pizza"
+    dish2.desc = "A dish made typically of flattened bread dough spread with a savory mixture usually including tomatoes and cheese and often other toppings and baked"
+    dish2.price = 25
+    dish2.img = '02.jpg'
+    dish2.discount = True
+```
+
+And in `index.html`
+
+```
+<div class="cont">
+  <img class='image' src="{{baseUrl}}/gallery/{{dish.img}}" alt="Image" class="img-fluid tm-gallery-img" />
+  {% if dish.discount %}
+    <div class="top-left disc">Discount</div>
+  {% endif %}
+  <figcaption>
+    <h4 class="tm-gallery-title">{{dish.name}}</h4>
+    <p class="tm-gallery-description">{{dish.desc}}</p>
+    <p class="tm-gallery-price">${{dish.price}}</p>
+  </figcaption>
+</div>
+```
+
+Use of if statement to check if the dish has discount or not and displaying data accordingly.
+
+![Discount](images/discount.png)

@@ -399,6 +399,7 @@ p, address {
   font-weight: 400;
   color: #1A6692;
   margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .tm-gallery-description {
@@ -456,6 +457,29 @@ p, address {
   margin-top: 30px;
   max-width: 530px;
 }
+
+/* User Defined */
+.cont {
+  height: auto;
+  width: auto;
+  position: relative;
+}
+.image {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.top-left {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  left: 150px;
+  top: 350px;
+}
+
+/* --- */
 
 @media (min-width: 768px) {
   .tm-description-box {

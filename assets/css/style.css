@@ -1,0 +1,14 @@
+
+figcaption {
+    margin-top: 15px;
+}
+.top-left {
+    position: absolute;
+    top: 0;
+    background-color: white;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 20px;
+  }
+  
