@@ -18,6 +18,8 @@
 ### Contents
 - [Django Setup](#1-django-setup)
 - [First App](#2-first-app)
+- [Django Template Language](#3-django-template-language)
+
 ---
 ## 1. [Django Setup](#1-django-setup)
 Python installation required.
@@ -169,7 +171,7 @@ def home(request):
 This is the home function which returns a HttpResponse to the url `''` for `Hello World`.
 
 ---
-## 3. [Django Template Language]()
+## 3. [Django Template Language](#3-django-template-language)
 
 ### Creating templates folder
 ```
