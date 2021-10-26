@@ -192,15 +192,8 @@ Create a file `Home.html`
 And add the following 
 
 ```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello World. This is Home.html</h1>
-</body>
-</html>
+
+<h1>Hello World. This is Home.html</h1>
 ```
 In the `djangoproject/djangoproject/settings.py` add the templates folder in the `DIRS`.
 
@@ -240,9 +233,7 @@ def home(request):
 
 And in the `templates/Home.html`
 ```
-<body>
-    <h1>Hello {{name}}</h1>
-</body>
+<h1>Hello {{name}}</h1>
 ```
 add `{{name}}` to show the passed value here.
 
@@ -251,3 +242,51 @@ Save all the files and open **http://127.0.0.1:8000/**
 ![Dynamic-Name](images/dynamic-name.png)
 
 In this way we can fetch data from the database and pass it in the html file.
+
+### Adding Base Template
+
+In the `templates` folder create a file named `base.html` and add the following html code.
+
+```
+<html lang="en">
+<head>
+    <title>{% block title %}  {% endblock title %}</title>
+</head>
+<body bgcolor='lightblue'>
+    {% block content %}
+    
+    {% endblock content %}
+</body>
+</html>
+```
+
+In this file the `{% block ___ %}` and `{% endblock ___ %}` are used to insert the data from another html file inside these blocks.
+
+Example : 
+
+Let the background color of the base template be `bgcolor='lightblue'`.
+
+Now in the `home.html` add 
+```
+{% extends 'base.html' %}
+
+{% block title %}
+Django Home
+{% endblock title %}
+
+{% block content %}
+<h1>Hello {{name}}</h1>
+{% endblock content %}
+```
+
+The `{% extends 'base.html' %}` will extend the base file.
+
+The data inside  `{% block title %}` will be sent to the block title of the `base.html`.
+
+Similarly the data inside `{% block content %}` will be sent to the block content of the `base.html`.
+
+Save all the files and open **http://127.0.0.1:8000/**
+
+![Base Template](images/base-template.png)
+
+The `base.html` file with blue background and the content from `home.html`.
