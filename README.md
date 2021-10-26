@@ -31,7 +31,7 @@
   - [Create a New App](#create-a-new-app)
   - [Adding urls](#adding-urls)
   - [Creating views](#creating-views)
-- [**Congratulations! You have created your first Django App**](#congratulations-you-have-created-your-first-django-app)
+  - [**Congratulations! You have created your first Django App**](#congratulations-you-have-created-your-first-django-app)
   - [**How do we get this ?**](#how-do-we-get-this-)
 - [3. Django Template Language](#3-django-template-language)
   - [Creating templates folder](#creating-templates-folder)
@@ -49,6 +49,12 @@
   - [Static Folder](#static-folder)
   - [Add Static Dirs and Root](#add-static-dirs-and-root)
   - [Edit Links and Load Static](#edit-links-and-load-static)
+- [7. Passing Dynamic Data](#7-passing-dynamic-data)
+  - [Modifying views.py](#modifying-viewspy)
+  - [Modifying index.html](#modifying-indexhtml)
+- [8. Models](#8-models)
+  - [Displaying passed data](#displaying-passed-data)
+  - [Passing Multiple Data](#passing-multiple-data)
 
 </details>
 
@@ -183,7 +189,7 @@ Save all the files and open **http://127.0.0.1:8000/**
 
 ![First-App](images/first-app.png)
 
-## **Congratulations! You have created your first Django App**
+### **Congratulations! You have created your first Django App**
 
 ---
 
@@ -561,3 +567,157 @@ Now you can see the website with all the static content displayed properly.
 ![Static Files Simple House](images/static-files-simple-house-3.png)
 
 </div>
+
+## 7. [Passing Dynamic Data](#7-passing-dynamic-data)
+
+We can pass the price of dishes dynamically.
+
+### Modifying views.py
+simple_house / views.py
+
+```
+def index(request):
+    return render(request, 'index.html',{'price' : 99})
+```
+Passed a value 99 for price.
+
+### Modifying index.html
+simple_house / index.html
+
+```
+<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+  <figure>
+    <img src="{% static 'img/gallery/01.jpg' %}" alt="Image" class="img-fluid tm-gallery-img" />
+    <figcaption>
+      <h4 class="tm-gallery-title">Fusce dictum finibus</h4>
+      <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
+      <p class="tm-gallery-price">${{price}}</p>
+    </figcaption>
+  </figure>
+</article>
+```
+Replacing the Original price by `{{price}}`
+<div align='center'>
+
+![Dynamic Data](images/dynamic-data.png)
+
+</div>
+
+## 8. [Models](#8-models)
+
+In `simple_house / models.py` create a class called Dish.
+```
+from django.db import models
+
+# Create your models here.
+class Dish(models.Model):
+    id : int
+    name : str
+    img : str
+    desc : str
+    price : int
+```
+And then in `simple_house / views.py` modify
+```
+from django.shortcuts import render
+from .models import Dish
+
+# Create your views here.
+def index(request):
+    dish1 = Dish()
+    dish1.name = "Salad"
+    dish1.desc = "A mixture of raw usually green leafy
+                  vegetables (as lettuce) combined 
+                  with other vegetables (as tomato and
+                  cucumber) and served with a dressing."
+    dish1.price = 25
+    dish1.img = '01.jpg'
+    return render(request, 'index.html',{'dish1' : dish1})
+```
+### Displaying passed data
+
+Modify `index.html` and add
+```
+{% load static %}
+{% static "img" as baseUrl %}
+```
+
+```
+<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+  <figure>
+    <img src="{{baseUrl}}/gallery/{{dish1.img}}" alt="Image" class="img-fluid tm-gallery-img" />
+    <figcaption>
+      <h4 class="tm-gallery-title">{{dish1.name}}</h4>
+      <p class="tm-gallery-description">{{dish1.desc}}</p>
+      <p class="tm-gallery-price">${{dish1.price}}</p>
+    </figcaption>
+  </figure>
+</article>
+```
+Note that the `baseUrl` name should be correct and the image src should also be valid.
+
+<div align='center'>
+
+![Model Data](images/model-data.png)
+
+</div>
+
+### Passing Multiple Data
+In `simple_house / views.py` create 4 dishes and pass them using `dishes`.
+
+This is not a proper way, we will do this using database later.
+```
+from django.shortcuts import render
+from .models import Dish
+
+# Create your views here.
+def index(request):
+
+    dish1 = Dish()
+    dish1.name = "Salad"
+    dish1.desc = "A mixture of raw usually green leafy vegetables (as lettuce) combined with other vegetables (as tomato and cucumber) and served with a dressing."
+    dish1.price = 10
+    dish1.img = '01.jpg'
+
+    dish2 = Dish()
+    dish2.name = "Pizza"
+    dish2.desc = "A dish made typically of flattened bread dough spread with a savory mixture usually including tomatoes and cheese and often other toppings and baked"
+    dish2.price = 25
+    dish2.img = '02.jpg'
+
+    dish3 = Dish()
+    dish3.name = "Garlic Bread"
+    dish3.desc = "It consists of bread topped with garlic and olive oil or butter and may include additional herbs, such as oregano"
+    dish3.price = 20
+    dish3.img = '03.jpg'
+
+    dish4 = Dish()
+    dish4.name = "Pasta"
+    dish4.desc = "Pasta is a type of food typically made from an unleavened dough of wheat flour mixed with water or eggs, and formed into sheets or other shapes"
+    dish4.price = 36
+    dish4.img = '04.jpg'
+
+    dishes = [dish1, dish2, dish3, dish4]
+    return render(request, 'index.html',{'dishes' : dishes})
+```
+
+In `index.html` create a for loop for the format code of a Dish like : 
+```
+<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+  {% for dish in dishes %}
+  <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+    <figure>
+      <img src="{{baseUrl}}/gallery/{{dish.img}}" alt="Image" class="img-fluid tm-gallery-img" />
+      <figcaption>
+        <h4 class="tm-gallery-title">{{dish.name}}</h4>
+        <p class="tm-gallery-description">{{dish.desc}}</p>
+        <p class="tm-gallery-price">${{dish.price}}</p>
+      </figcaption>
+    </figure>
+  </article>
+  {% endfor %}
+</div>
+```
+In this way every object will be displayed using the same code.
+
+![Multiple Data](images/multiple-data.png)
