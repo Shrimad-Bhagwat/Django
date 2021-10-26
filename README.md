@@ -19,7 +19,7 @@
 - [Django Setup](#1-django-setup)
 - [First App](#2-first-app)
 ---
-## 1. [Django Setup]()
+## 1. [Django Setup](#1-django-setup)
 Python installation required.
 ### Install Virtual Environment
   ```
@@ -81,7 +81,7 @@ To Stop the Server
 ![Django Successful](./images/django-successful.png)
 
 ---
-## 2. [First App]()
+## 2. [First App](#2-first-app)
 
 ### Create a New App
 ```
@@ -150,3 +150,102 @@ Save all the files and open **http://127.0.0.1:8000/**
 ![First-App](images/first-app.png)
 
 ## **Congratulations! You have created your first Django App**
+
+---
+
+### **How do we get this ?**
+Django will first search for `home` or `''` url in the urls.py of the project folder i.e. djangoproject.
+`path('', include('myapp.urls'),`
+
+It says to search for the url in `myapp/urls.py`
+`path('', views.home, name='home'),`
+
+which tells that the `''` url should goto `views.home` i.e. it should look for a function named `home` in the `myapp/views.py` 
+
+```
+def home(request):
+    return HttpResponse("<h1>Hello World!</h1>")> 
+```
+This is the home function which returns a HttpResponse to the url `''` for `Hello World`.
+
+---
+## 3. [Django Template Language]()
+
+### Creating templates folder
+```
+mkdir templates
+```
+
+```
+djangoproject
+  |__ djangoproject
+  |__ myapp
+  |__ templates
+  |__ manage.py
+```
+
+### Adding templates
+
+Create a file `Home.html`
+And add the following 
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World. This is Home.html</h1>
+</body>
+</html>
+```
+In the `djangoproject/djangoproject/settings.py` add the templates folder in the `DIRS`.
+
+```
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'APP_DIRS': True,
+    },
+]
+```
+
+Now modify your `djangoproject/myapp/views.py`
+
+```
+def home(request):
+    return render(request, 'Home.html')
+```
+It will now render a template named `Home.html` from `templates` folder at the Home or `''` url.
+
+Save all the files and open **http://127.0.0.1:8000/**
+
+![Home-Template](images/home-tempate.png)
+
+### Dynamic Content
+
+Now instead of this static content we want to pass values to Home.html dynamically. 
+
+In the `djangoproject/myapp/views.py` pass values using `{}` a Dictionary as follows.
+
+```
+def home(request):
+    return render(request, 'Home.html',{'name' : "Shrimad"})
+```
+
+And in the `templates/Home.html`
+```
+<body>
+    <h1>Hello {{name}}</h1>
+</body>
+```
+add `{{name}}` to show the passed value here.
+
+Save all the files and open **http://127.0.0.1:8000/**
+
+![Dynamic-Name](images/dynamic-name.png)
+
+In this way we can fetch data from the database and pass it in the html file.
