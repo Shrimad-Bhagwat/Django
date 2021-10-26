@@ -290,3 +290,105 @@ Save all the files and open **http://127.0.0.1:8000/**
 ![Base Template](images/base-template.png)
 
 The `base.html` file with blue background and the content from `home.html`.
+
+---
+## 4. [Adding Two Values](#4-adding-two-values)
+
+### Creating a Form
+> **Using 'GET' method.**
+
+In the `home.html` modify the content block.
+
+```
+{% block content %}
+<h1>Hello {{name}}</h1>
+
+<form action="add" method="get">
+    Enter 1st number : <input type="text" name="num1"><br>
+    Enter 2nd number : <input type="text" name="num2"><br>
+    <input type="submit" value="Add">
+</form>
+
+{% endblock content %}
+```
+
+Now create a new file `result.html` to display the Result.
+
+```
+{% extends 'base.html' %}
+
+{% block title %}
+Django Add
+{% endblock title %}
+
+{% block content %}
+Result : {{result}}
+{% endblock content %}
+```
+
+The action will be called i.e. `add`. So we have to add it to the `urls.py` of `myapp`.
+
+```
+urlpatterns = [
+    path('',views.home,name='home'),
+    path('add',views.add,name='add'),
+]
+```
+
+Create a view for add in `myapp/views.py`.
+
+```
+def add(request):
+    val1 = int(request.GET['num1'])
+    val2 = int(request.GET['num2'])
+    result = val1 + val2
+    return render(request,'result.html',{'result' : result})
+```
+We created a variable `val1` and using `request.GET` fetched the value of `num1`.
+Same for val2 and calculated result and passed it to `result.html`
+
+Save all the files and open **http://127.0.0.1:8000/**
+
+<div>
+
+`home` : `home.html`           |  `add` : `result.html`
+:-------------------------:|:-------------------------:
+![Add Home](images/add-home.png)  |  ![Add Result](images/add-res.png)
+
+</div>
+
+Method GET is used to fetch the data and Method POST is used to submit the data from the server.
+
+Using GET method the data entered can be seen in the url.
+But in POST method the data will not be shown in the url.
+
+> **Using 'POST' method**
+
+In the `home.html` change the form method to `post` and add `{% csrf_token %}`
+
+```
+<form action="add" method="post">
+    {% csrf_token %}
+    Enter 1st number : <input type="text" name="num1"><br>
+    Enter 2nd number : <input type="text" name="num2"><br>
+    <input type="submit" value="Add">
+</form>
+```
+
+Modify the `add` view in `views.py`
+
+```
+def add(request):
+    val1 = int(request.POST['num1'])
+    val2 = int(request.POST['num2'])
+    result = val1 + val2
+    return render(request,'result.html',{'result' : result})
+```
+
+<div>
+
+`home` : `home.html`           |  `add` : `result.html`
+:-------------------------:|:-------------------------:
+![Add Home Post](images/add-home-post.png)  |  ![Add Result Post](images/add-res-post.png)
+
+</div>
