@@ -20,6 +20,7 @@
 - [First App](#2-first-app)
 - [Django Template Language](#3-django-template-language)
 - [GET vs POST](#4-get-vs-post)
+- [Model View Template](#5-model-view-template)
 
 ---
 ## 1. [Django Setup](#1-django-setup)
@@ -395,3 +396,21 @@ def add(request):
 </div>
 
 ---
+
+
+## 5. [Model View Template](#5-model-view-template)
+
+<div align='center'>
+
+![MVT](images/MVT.gif)
+
+</div>
+
+**DATA** : It stores all the data from database.
+**MODEL** : It is linked to data to access/store it.
+**TEMPLATE** : It includes HTML,CSS,JS etc. using DTL
+**VIEW** : It includes all the logic and combines Model and Template.
+**url** : All the paths used for mapping the project urls.
+
+---
+
