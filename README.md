@@ -19,6 +19,7 @@
 - [Django Setup](#1-django-setup)
 - [First App](#2-first-app)
 - [Django Template Language](#3-django-template-language)
+- [GET vs POST](#4-get-vs-post)
 
 ---
 ## 1. [Django Setup](#1-django-setup)
@@ -292,7 +293,7 @@ Save all the files and open **http://127.0.0.1:8000/**
 The `base.html` file with blue background and the content from `home.html`.
 
 ---
-## 4. [Adding Two Values](#4-adding-two-values)
+## 4. [GET vs POST](#4-get-vs-post)
 
 ### Creating a Form
 > **Using 'GET' method.**
@@ -392,3 +393,5 @@ def add(request):
 ![Add Home Post](images/add-home-post.png)  |  ![Add Result Post](images/add-res-post.png)
 
 </div>
+
+---
