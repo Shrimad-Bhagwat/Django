@@ -429,10 +429,15 @@ def add(request):
 </div>
 
 **DATA** : It stores all the data from database.
+
 **MODEL** : It is linked to data to access/store it.
+
 **TEMPLATE** : It includes HTML,CSS,JS etc. using DTL
+
 **VIEW** : It includes all the logic and combines Model and Template.
+
 **url** : All the paths used for mapping the project urls.
+
 
 ---
 
