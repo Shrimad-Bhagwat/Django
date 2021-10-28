@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['https://simple-house.herokuapp.com','127.0.0.1']
 
 INSTALLED_APPS = [
     # My Apps
-    'simple_house.apps.SimpleHouseConfig',
+    'simple_house',
     # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
