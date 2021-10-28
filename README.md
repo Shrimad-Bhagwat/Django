@@ -1207,6 +1207,11 @@ def login(request):
     else:
         return render(request,'login.html')
 ```
+<div align='center'>
+
+  ![Login Page](images/login-page.png)
+
+</div>
 
 ### Adding Login Logout Link in index.html
 ```
@@ -1226,5 +1231,12 @@ def logout(request):
   auth.logout(request)
   return redirect('/')
 ```
+
+<div align='center'>
+
+  ![Home](images/home-page.png)
+  ![Agter Login](images/login.png)
+
+</div>
 
 ---
