@@ -77,6 +77,7 @@
   - [Login View](#login-view)
   - [Adding Login Logout Link in index.html](#adding-login-logout-link-in-indexhtml)
   - [Logout View](#logout-view)
+  - [Final](#final)
 
 </details>
 
@@ -1154,7 +1155,7 @@ Username           |  Password
 ## 16. [User Login Logout](#16-user-login-logout)
 
 ### Creating login.html
-
+In the `templates` create `login.html`
 ```
 <div class="form">
     <h1>Login</h1>
@@ -1176,7 +1177,7 @@ Username           |  Password
 ```
 
 ### Modifying urls.py
-Adding login path
+Adding login and logout path
 ```
 urlpatterns = [
     path('register',views.register,name='register'),
@@ -1186,8 +1187,8 @@ urlpatterns = [
 ```
 
 ### Login View
+Creating View for Login 
 ```
-
 # Login
 def login(request):
     if request.method == 'POST':
@@ -1231,7 +1232,7 @@ def logout(request):
   auth.logout(request)
   return redirect('/')
 ```
-
+### Final  
 <div align='center'>
 
   ![Home](images/home-page.png)
