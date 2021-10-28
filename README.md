@@ -62,6 +62,7 @@
   - [Models](#models)
   - [Migrations](#migrations)
   - [Migrate](#migrate)
+- [12. Admin Panel](#12-admin-panel)
 
 </details>
 
@@ -873,3 +874,34 @@ Now to pass this data to the database run
 python manage.py migrate
 ```
 And a new db.sqlite3 will be created with the Model we created.
+
+
+## 12. [Admin Panel](#12-admin-panel)
+
+For accessing the Admin Panel you should be a superuser.
+Which can be created by 
+```
+python manage.py createsuperuser
+```
+Enter Username, Email, Password and Confirm Password.
+
+Save all the files and open **http://127.0.0.1:8000/admin** to open the admin panel.
+
+After Login you will see an admin panel
+
+![Admin Panel](images/admin-panel.png)
+
+But to see our Dish Model we should register it in 
+`simple_house/admin.py`
+
+```
+from django.contrib import admin
+from .models import Dish
+
+# Register your models here.
+admin.site.register(Dish)
+```
+
+Now we can see the Dish in the Admin Panel under simple_house section.
+
+![Admin Panel 2](images/admin-panel-2.png)
