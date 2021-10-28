@@ -63,6 +63,11 @@
   - [Migrations](#migrations)
   - [Migrate](#migrate)
 - [12. Admin Panel](#12-admin-panel)
+- [13. Add Fetch Data](#13-add-fetch-data)
+  - [Path for Images(Media)](#path-for-imagesmedia)
+  - [Add Dish](#add-dish)
+  - [Modify views.py](#modify-viewspy-1)
+  - [Image Path](#image-path)
 
 </details>
 
@@ -921,3 +926,73 @@ So the Dish is displayed as `Dishs`.
  
 ---
 
+## 13. [Add Fetch Data](#13-add-fetch-data)
+
+### Path for Images(Media)
+ 
+In `djangoproject/settings.py` add 
+
+```
+# Media files
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+```
+
+Then in `djangoproject/urls.py` 
+
+```
+from django.contrib import admin
+from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('simple_house.urls')),
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+### Add Dish
+
+Now goto  **http://127.0.0.1:8000/admin/simple_house/dish/** and add new dishes like this.
+
+![Add Dish Panel](images/add-dish-panel.png)
+
+### Modify views.py
+
+In `simple_house/views.py` clear all the static data and modify it to
+```
+def index(request):
+    dishes = Dish.objects.all()
+    return render(request, 'index.html',{'dishes' : dishes})
+```
+
+### Image Path
+
+Now we need to change the path of the images and fetch it from the data.
+
+In `templates/index.html` modify the image src to `{{dish.img.url}}` from `{{baseUrl}}/gallery/{{dish.img}}`. 
+
+```
+<div class="cont">
+  <img class='image' src="{{dish.img.url}}" alt="Image" class="img-fluid tm-gallery-img" />
+  {% if dish.discount %}
+    <div class="top-left disc">Discount</div>
+  {% endif %}
+  <figcaption>
+    <h4 class="tm-gallery-title">{{dish.name}}</h4>
+    <p class="tm-gallery-description">{{dish.desc}}</p>
+    <p class="tm-gallery-price">${{dish.price}}</p>
+  </figcaption>
+</div>
+```
+
+Save all the files and open **http://127.0.0.1:8000/**
+
+![Dish Fetch](images/dish-fetch.png)
+
+All the data from the database including images can be seen properly.
