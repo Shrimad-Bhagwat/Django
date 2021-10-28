@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ag^6t1wm35n9msea_9(7shxbd$3dgzu)+oe_)148mjh0w))&9f'
+SECRET_KEY = ';[a+6wG?>rEAi1M3Szc)>#V3{R1+,,Nn:?%Y;L2I3I]8p9lu>[z@#Ps~YTRrlo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -142,3 +142,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 # Activating Django Heroku
 django_heroku.settings(locals())
+
+
+
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
