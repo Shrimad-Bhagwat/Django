@@ -576,6 +576,8 @@ Now you can see the website with all the static content displayed properly.
 
 </div>
 
+---
+
 ## 7. [Passing Dynamic Data](#7-passing-dynamic-data)
 
 We can pass the price of dishes dynamically.
@@ -610,6 +612,8 @@ Replacing the Original price by `{{price}}`
 ![Dynamic Data](images/dynamic-data.png)
 
 </div>
+
+---
 
 ## 8. [Models](#8-models)
 
@@ -783,10 +787,13 @@ Use of if statement to check if the dish has discount or not and displaying data
 
 ![Discount](images/discount.png)
 
+---
 
 ## 9. [ORM](#9-orm)
 
 One of the most powerful features of Django is its Object-Relational Mapper (ORM), which enables you to interact with your database, like you would with SQL. In fact, Django's ORM is just a pythonical way to create SQL to query and manipulate your database and get results in a pythonic fashion.
+
+---
 
 ## 10. [Database Setup](#10-database-setup)
 
@@ -803,6 +810,8 @@ DATABASES = {
 
 ```
 This will create a database named `db.sqlite3` in the Base Dir of the project.
+
+---
 
 ## 11. [Models and Migrations](#11-models-and-migrations)
 
@@ -875,6 +884,7 @@ python manage.py migrate
 ```
 And a new db.sqlite3 will be created with the Model we created.
 
+---
 
 ## 12. [Admin Panel](#12-admin-panel)
 
@@ -905,3 +915,9 @@ admin.site.register(Dish)
 Now we can see the Dish in the Admin Panel under simple_house section.
 
 ![Admin Panel 2](images/admin-panel-2.png)
+
+In this Django will add an `s` at the end of the Model.
+So the Dish is displayed as `Dishs`.
+ 
+---
+
