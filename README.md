@@ -56,6 +56,12 @@
   - [Displaying passed data](#displaying-passed-data)
   - [Passing Multiple Data](#passing-multiple-data)
   - [Using Condition](#using-condition)
+- [9. ORM](#9-orm)
+- [10. Database Setup](#10-database-setup)
+- [11. Models and Migrations](#11-models-and-migrations)
+  - [Models](#models)
+  - [Migrations](#migrations)
+  - [Migrate](#migrate)
 
 </details>
 
@@ -775,3 +781,95 @@ And in `index.html`
 Use of if statement to check if the dish has discount or not and displaying data accordingly.
 
 ![Discount](images/discount.png)
+
+
+## 9. [ORM](#9-orm)
+
+One of the most powerful features of Django is its Object-Relational Mapper (ORM), which enables you to interact with your database, like you would with SQL. In fact, Django's ORM is just a pythonical way to create SQL to query and manipulate your database and get results in a pythonic fashion.
+
+## 10. [Database Setup](#10-database-setup)
+
+We will be using the `sqlite3` database for our project.
+
+In the `djangoproject/settings.py`
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+```
+This will create a database named `db.sqlite3` in the Base Dir of the project.
+
+## 11. [Models and Migrations](#11-models-and-migrations)
+
+For creating tables in database automatically we need to create Models for out Classes .
+
+### Models
+
+In the `simple_house/models.py` modify
+
+```
+class Dish(models.Model):
+
+    name = models.CharField(max_length=100)
+    img = models.ImageField(upload_to='pics')
+    desc = models.TextField()
+    price = models.IntegerField()
+    discount = models.BooleanField(default=False)
+```
+ And `djangoproject/settings.py` add 
+```
+INSTALLED_APPS = [
+    # My Apps
+    'simple_house.apps.SimpleHouseConfig',
+]
+```
+
+Before migrations you should install `Pillow` for working with `ImageField`.
+
+```
+python -m pip install Pillow
+```
+
+### Migrations
+
+```
+python manage.py makemigrations
+```
+
+which will create
+```
+Migrations for 'simple_house':
+  simple_house\migrations\0001_initial.py
+    - Create model Dish
+```
+and in `simple_house/migrations/0001_initial.py`
+```
+class Migration(migrations.Migration):
+    initial = True
+    dependencies = [
+    ]
+    operations = [
+        migrations.CreateModel(
+            name='Dish',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+                ('img', models.ImageField(upload_to='pics')),
+                ('desc', models.TextField()),
+                ('price', models.IntegerField()),
+                ('discount', models.BooleanField(default=False)),
+            ],
+        ),
+    ]
+```
+### Migrate
+
+Now to pass this data to the database run
+```
+python manage.py migrate
+```
+And a new db.sqlite3 will be created with the Model we created.
