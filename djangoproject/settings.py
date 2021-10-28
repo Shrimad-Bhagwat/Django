@@ -142,3 +142,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 # Activating Django Heroku
 django_heroku.settings(locals())
+
+SECURE_HSTS_SECONDS = 31536000
