@@ -71,6 +71,12 @@
 - [14. User Registration](#14-user-registration)
   - [Accounts](#accounts)
 - [15. Passing Messages](#15-passing-messages)
+- [16. User Login Logout](#16-user-login-logout)
+  - [Creating login.html](#creating-loginhtml)
+  - [Modifying urls.py](#modifying-urlspy)
+  - [Login View](#login-view)
+  - [Adding Login Logout Link in index.html](#adding-login-logout-link-in-indexhtml)
+  - [Logout View](#logout-view)
 
 </details>
 
@@ -1142,5 +1148,83 @@ Username           |  Password
 ![Username Registration](images/username-taken.png)  |  ![Password Registration](images/password-not-matched.png)
 
 </div>
+
+---
+
+## 16. [User Login Logout](#16-user-login-logout)
+
+### Creating login.html
+
+```
+<div class="form">
+    <h1>Login</h1>
+    {% for message in messages %}
+      <div class="container">
+        <h4>{{message}}</h4>
+      </div>
+    {% endfor %}
+    <form action="login" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" id="username" placeholder="Username">
+        <input type="password" name="password" id="password" placeholder="Password">
+        <input type="submit" value="Login" class="loginbtn">
+    </form>
+    <div class="container link">
+        <p>Don't have an account? <a href="register">Register</a>.</p>
+    </div>
+</div>
+```
+
+### Modifying urls.py
+Adding login path
+```
+urlpatterns = [
+    path('register',views.register,name='register'),
+    path('login',views.login,name='login'),
+    path('logout',views.logout,name='logout'),
+]
+```
+
+### Login View
+```
+
+# Login
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username,password=password)
+
+        if user is not None:
+            auth.login(request,user)
+            print("User Logged In")
+            return redirect('/')
+        else:
+            print("Invalid Credentials")
+            messages.info(request,'Invalid Credentials')
+            return redirect('login')
+    else:
+        return render(request,'login.html')
+```
+
+### Adding Login Logout Link in index.html
+```
+<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
+{% if user.is_authenticated %}
+  <li class="tm-nav-li">Hello, {{user.first_name}} </li>
+  <li class="tm-nav-li"><a href="accounts/logout" class="tm-nav-link">Logout</a></li>
+{% else %}
+  <li class="tm-nav-li"><a href="accounts/login" class="tm-nav-link">Login</a></li>
+  <li class="tm-nav-li"><a href="accounts/register" class="tm-nav-link">Register</a></li>
+{% endif %}
+```
+### Logout View
+```
+# Logout
+def logout(request):
+  auth.logout(request)
+  return redirect('/')
+```
 
 ---

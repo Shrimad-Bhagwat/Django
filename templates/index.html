@@ -5,43 +5,41 @@
 
 <head>
 	<meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Simple House Template</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Simple House Template</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
 	<link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet" />
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<!--
-
-Simple House
-
-https://templatemo.com/tm-539-simple-house
-
--->
-<body> 
 
 	<div class="container">
-	<!-- Top box -->
+		<!-- Top box -->
 		<!-- Logo & Site Name -->
 		<div class="placeholder">
 			<div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/simple-house-01.jpg'%}">
 				<div class="tm-header">
 					<div class="row tm-header-inner">
 						<div class="col-md-6 col-12">
-							<img src="{% static 'img/simple-house-logo.png' %}" alt="Logo" class="tm-site-logo" /> 
+							<img src="{% static 'img/simple-house-logo.png' %}" alt="Logo" class="tm-site-logo" />
 							<div class="tm-site-text-box">
 								<h1 class="tm-site-title">Simple House</h1>
-								<h6 class="tm-site-description">new restaurant template</h6>	
+								<h6 class="tm-site-description">New restaurant template</h6>
 							</div>
 						</div>
 						<nav class="col-md-6 col-12 tm-nav">
 							<ul class="tm-nav-ul">
 								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
-								<li class="tm-nav-li"><a href="accounts/register" class="tm-nav-link">Register</a></li>
-								<li class="tm-nav-li"><a href="accounts/login" class="tm-nav-link">Login</a></li>
+								{% if user.is_authenticated %}
+									<li class="tm-nav-li">Hello, {{user.first_name}} </li>
+									<li class="tm-nav-li"><a href="accounts/logout" class="tm-nav-link">Logout</a></li>
+								{% else %}
+									<li class="tm-nav-li"><a href="accounts/login" class="tm-nav-link">Login</a></li>
+									<li class="tm-nav-li"><a href="accounts/register" class="tm-nav-link">Register</a></li>
+								{% endif %}
 							</ul>
-						</nav>	
+						</nav>
 					</div>
 				</div>
 			</div>
@@ -50,60 +48,47 @@ https://templatemo.com/tm-539-simple-house
 		<main>
 			<header class="row tm-welcome-section">
 				<h2 class="col-12 text-center tm-section-title">Welcome to Simple House</h2>
-				<p class="col-12 text-center">Total 3 HTML pages are included in this template. Header image has a parallax effect. You can feel free to download, edit and use this TemplateMo layout for your commercial or non-commercial websites.</p>
+				<p class="col-12 text-center">Total 3 HTML pages are included in this template. Header image has a
+					parallax effect. You can feel free to download, edit and use this TemplateMo layout for your
+					commercial or non-commercial websites.</p>
 			</header>
-			
-			<!-- <div class="tm-paging-links">
-				<nav>
-					<ul>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link active">Pizza</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Salad</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Noodle</a></li>
-					</ul>
-				</nav>
-			</div> -->
 
 			<!-- Gallery -->
 			<div class="row tm-gallery">
+
 				<div id="tm-gallery-page-pizza" class="tm-gallery-page">
 					{% for dish in dishes %}
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<div class="cont">
-								<img class='image' src="{{dish.img.url}}" alt="Image" class="img-fluid tm-gallery-img" />
-								{% if dish.discount %}
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<a class="cont" href="dish/{{dish.id}}" style="text-decoration: none; color:black;">
+									<img class='image' src="{{dish.img.url}}" alt="Image"
+										class="img-fluid tm-gallery-img" />
+									{% if dish.discount %}
 									<div class="top-left disc">Discount</div>
-								{% endif %}
-								<figcaption>
-									<h4 class="tm-gallery-title">{{dish.name}}</h4>
-									<p class="tm-gallery-description">{{dish.desc}}</p>
-									<p class="tm-gallery-price">${{dish.price}}</p>
-								</figcaption>
-							</div>
-						</figure>
-					</article>
+									{% endif %}
+									<div>
+										<h4 class="tm-gallery-title">{{dish.name}}</h4>
+										<p class="tm-gallery-description">{{dish.desc}}</p>
+										<p class="tm-gallery-price">${{dish.price}}</p>
+									</div>
+								</a>
+							</figure>
+						</article>
 					{% endfor %}
 				</div>
+			</div>
+		</main>
+	</div>
+
 	<div style="margin:0 auto;">
-	<footer class="tm-footer text-center">
-		<p>Copyright &copy; 2021 Simple House</p>
-	</footer>
+		<footer class="tm-footer text-center">
+			<p>Copyright &copy; 2021 Simple House</p>
+			<p style="font-size:20px"><a href="https://github.com/Shrimad-Bhagwat"><i class="fa fa-github"
+						style="font-size:20px"></i> Shrimad-Bhagwat</a></p>
+		</footer>
 	</div>
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/parallax.min.js' %}"></script>
-	<script>
-		$(document).ready(function(){
-			// Handle click on paging links
-			$('.tm-paging-link').click(function(e){
-				e.preventDefault();
-				
-				var page = $(this).text().toLowerCase();
-				$('.tm-gallery-page').addClass('hidden');
-				$('#tm-gallery-page-' + page).removeClass('hidden');
-				$('.tm-paging-link').removeClass('active');
-				$(this).addClass("active");
-			});
-		});
-	</script>
-</body>
+	</body>
+
 </html>

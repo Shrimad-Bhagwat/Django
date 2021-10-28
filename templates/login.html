@@ -43,7 +43,7 @@
           background-color: #ddd;
           outline: none;
         }
-        .registerbtn {
+        .loginbtn {
           background-color: #04AA6D;
           color: white;
           padding: 16px 20px;
@@ -55,7 +55,7 @@
           border-radius: 10px;
           font-size: 16px;
         }
-        .registerbtn:hover {
+        .loginbtn:hover {
           opacity: 1;
         }
         a {
@@ -71,11 +71,16 @@
 <body>
     <div class="form">
         <h1>Login</h1>
+        {% for message in messages %}
+          <div class="container">
+            <h4>{{message}}</h4>
+          </div>
+        {% endfor %}
         <form action="login" method="post">
             {% csrf_token %}
             <input type="text" name="username" id="username" placeholder="Username">
-            <input type="password" name="password1" id="password1" placeholder="Password">
-            <input type="submit" value="Login" class="registerbtn">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="submit" value="Login" class="loginbtn">
         </form>
         <div class="container link">
             <p>Don't have an account? <a href="register">Register</a>.</p>

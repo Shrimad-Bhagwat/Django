@@ -1,0 +1,100 @@
+{% load static %}
+{% static "img" as baseUrl %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Simple House Template</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+	<link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .top-left {
+            position: absolute;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+            border: 1px solid black;
+            padding: 5px;
+            border-radius: 20px;
+          }
+          
+    </style>
+</head>
+
+	<div class="container">
+		<!-- Top box -->
+		<!-- Logo & Site Name -->
+		<div class="placeholder">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/simple-house-01.jpg'%}">
+				<div class="tm-header">
+					<div class="row tm-header-inner">
+						<div class="col-md-6 col-12">
+							<img src="{% static 'img/simple-house-logo.png' %}" alt="Logo" class="tm-site-logo" />
+							<div class="tm-site-text-box">
+								<h1 class="tm-site-title">Simple House</h1>
+								<h6 class="tm-site-description">new restaurant template</h6>
+							</div>
+						</div>
+						<nav class="col-md-6 col-12 tm-nav">
+							<ul class="tm-nav-ul">
+								<li class="tm-nav-li"><a href="/" class="tm-nav-link active">Home</a></li>
+								{% if user.is_authenticated %}
+                                    <li class="tm-nav-li">Hello, {{user.first_name}} </li>
+                                    <li class="tm-nav-li"><a href="/accounts/logout" class="tm-nav-link">Logout</a></li>
+								{% else %}
+                                    <li class="tm-nav-li"><a href="accounts/login" class="tm-nav-link">Login</a></li>
+                                    <li class="tm-nav-li"><a href="accounts/register" class="tm-nav-link">Register</a></li>
+								{% endif %}
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<main>
+
+
+			<!-- Gallery -->
+			<div class="row tm-gallery">
+
+				<div id="tm-gallery-page-pizza" class="tm-gallery-page" style="padding:20px; min-height:350px;">
+					{% for d in dish %}
+                        <div class="cont" style="display: flex; padding:20px 10vw;" >
+                            <div class="img">
+                                <img class='image' src="{{d.img.url}}" alt="Image" class="img-fluid tm-gallery-img" />
+                            </div>
+                            
+                            <div style="padding:20px;">
+                                <h4 class="tm-gallery-title">{{d.name}}</h4>
+                                <p class="tm-gallery-description">{{d.desc}}</p>
+                                {% if d.discount %}
+                                <span style="border: 1px solid black; padding:5px;">Discount</span>
+                                {% endif %}
+                                <br><br>
+                                <p class="tm-gallery-price">${{d.price}}</p>
+                            </div>
+                        </div>
+					{% endfor %}
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<div style="margin:0 auto;">
+		<footer class="tm-footer text-center">
+			<p>Copyright &copy; 2021 Simple House</p>
+			<p style="font-size:20px"><a href="https://github.com/Shrimad-Bhagwat"><i class="fa fa-github"
+						style="font-size:20px"></i> Shrimad-Bhagwat</a></p>
+		</footer>
+	</div>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/parallax.min.js' %}"></script>
+	</body>
+
+</html>
