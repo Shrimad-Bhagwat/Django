@@ -71,6 +71,11 @@
 <body>
     <div class="form">
         <h1>Register</h1>
+        {% for message in messages %}
+          <div class="container">
+            <h4>{{message}}</h4>
+          </div>
+        {% endfor %}
         <form action="register" method="post">
             {% csrf_token %}
             <input type="text" name="first_name" id="first_name" placeholder="First Name">
@@ -83,7 +88,7 @@
         </form>
         <div class="container link">
             <p>Already have an account? <a href="login">Login</a>.</p>
-        </div>
+        </div>        
     </div>
 </body>
 </html>

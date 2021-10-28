@@ -70,6 +70,7 @@
   - [Image Path](#image-path)
 - [14. User Registration](#14-user-registration)
   - [Accounts](#accounts)
+- [15. Passing Messages](#15-passing-messages)
 
 </details>
 
@@ -1083,3 +1084,63 @@ Add `accounts/register` path link in `index.html`.
 <li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
 <li class="tm-nav-li"><a href="accounts/register" class="tm-nav-link">Register</a></li>
 ```
+![Register](images/register.png)
+
+---
+
+## 15. [Passing Messages](#15-passing-messages)
+
+Now for every error like 'Username taken' or 'Password not Matched' we need to display it to the user.
+
+So we add 
+```
+from django.contrib import messages
+```
+
+```
+if password1==password2:    
+    if User.objects.filter(username=username).exists():
+        print("Username already taken!")
+        messages.info(request,'Username already taken!')
+        return redirect('register')
+    elif User.objects.filter(email=email).exists():
+        print("Email already in use")
+        messages.info(request,'Email already in use!')
+        return redirect('register')
+    else:
+        user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
+        user.save()
+        # print('Password Matched!')
+        # messages.info(request,'Password Matched!')
+        return redirect('/')
+else:
+    print('Password Not Matched!')
+    messages.info(request,'Password Not Matched!')
+    return redirect('register')
+
+else:
+return render(request,'register.html')
+return redirect('/')
+```
+
+Using `messages.info(request, "<message>")` we can pass messages to the html file.
+
+To display it 
+```
+{% for message in messages %}
+  <div class="container">
+    <h4>{{message}}</h4>
+  </div>
+{% endfor %}
+```
+add this in `register.html`
+
+<div align='center'>
+
+Username           |  Password
+:-------------------------:|:-------------------------:
+![Username Registration](images/username-taken.png)  |  ![Password Registration](images/password-not-matched.png)
+
+</div>
+
+---
