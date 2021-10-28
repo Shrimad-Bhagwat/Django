@@ -68,6 +68,8 @@
   - [Add Dish](#add-dish)
   - [Modify views.py](#modify-viewspy-1)
   - [Image Path](#image-path)
+- [14. User Registration](#14-user-registration)
+  - [Accounts](#accounts)
 
 </details>
 
@@ -996,3 +998,88 @@ Save all the files and open **http://127.0.0.1:8000/**
 ![Dish Fetch](images/dish-fetch.png)
 
 All the data from the database including images can be seen properly.
+
+## 14. [User Registration](#14-user-registration)
+
+### Accounts
+
+For managing registration and login let's create a new app `accounts`.
+
+```
+python manage.py startapp accounts
+```
+
+Create a new `urls.py` file in `accounts`.
+
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('register',views.register,name='register'),
+]
+```
+
+Include it in the `djangoproject/urls.py`
+```
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('simple_house.urls')),
+    path('accounts/', include('accounts.urls')),
+]
+```
+Create `register.html` with
+```
+<div class="form">
+    <h1>Register</h1>
+    <form action="register" method="post">
+        {% csrf_token %}
+        <input type="text" name="first_name" id="first_name" placeholder="First Name">
+        <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+        <input type="text" name="username" id="username" placeholder="Username">
+        <input type="email" name="email" id="email" placeholder="Email">
+        <input type="password" name="password1" id="password1" placeholder="Password">
+        <input type="password" name="password2" id="password2" placeholder="Confirm Password">
+        <input type="submit" value="Register" class="registerbtn">
+    </form>
+    <div class="container link">
+        <p>Already have an account? <a href="login">Login</a>.</p>
+    </div>
+</div>
+```
+Then create a view for `register` in `accounts/views.py`
+```
+def register(request):
+
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        email = request.POST['email']
+
+        if password1==password2:    
+            if User.objects.filter(username=username).exists():
+                print("Username already Taken")
+            elif User.objects.filter(email=email).exists():
+                print("Email already in use")
+            else:
+                user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
+                user.save()
+                print('Password Matched')
+                return redirect('/')
+        else:
+            print('Password Not Matched')
+
+    else:
+        return render(request,'register.html')
+    return redirect('/')
+
+```
+
+Add `accounts/register` path link in `index.html`.
+```
+<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
+<li class="tm-nav-li"><a href="accounts/register" class="tm-nav-link">Register</a></li>
+```

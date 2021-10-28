@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          text-align: center;
+          background-color: lightgray;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        .form {
+          padding: 20px;
+          background-color: white;
+          width: 400px;
+          margin: 20px auto;
+          border-radius: 20px;
+        }
+        
+        .container{
+            padding: 8px 16px;
+            margin: 8px 0px;
+            background-color: lightgray;
+            border-radius: 10px;
+            
+        }
+        input[type=text], input[type=password], input[type=email] {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 15px 0;
+          display: inline-block;
+          border: none;
+          border-radius: 10px;
+          background: #f1f1f1;
+          font-size: 14px;
+        }
+        input[type=text]:focus, input[type=password]:focus,input[type=email]:focus {
+          background-color: #ddd;
+          outline: none;
+        }
+        .registerbtn {
+          background-color: #04AA6D;
+          color: white;
+          padding: 16px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          opacity: 0.8;
+          border-radius: 10px;
+          font-size: 16px;
+        }
+        .registerbtn:hover {
+          opacity: 1;
+        }
+        a {
+          color: dodgerblue;
+          text-decoration: none;
+        }
+        .link {
+          background-color: #f1f1f1;
+          text-align: center;
+        }
+        </style>
+</head>
+<body>
+    <div class="form">
+        <h1>Register</h1>
+        <form action="register" method="post">
+            {% csrf_token %}
+            <input type="text" name="first_name" id="first_name" placeholder="First Name">
+            <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="email" name="email" id="email" placeholder="Email">
+            <input type="password" name="password1" id="password1" placeholder="Password">
+            <input type="password" name="password2" id="password2" placeholder="Confirm Password">
+            <input type="submit" value="Register" class="registerbtn">
+        </form>
+        <div class="container link">
+            <p>Already have an account? <a href="login">Login</a>.</p>
+        </div>
+    </div>
+</body>
+</html>
