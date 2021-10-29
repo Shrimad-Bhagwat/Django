@@ -12,4 +12,5 @@ class Dish(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        db_table = 'Dish' 
+        db_table = 'Dish'
+
