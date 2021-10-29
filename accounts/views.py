@@ -24,7 +24,7 @@ def register(request):
                 messages.info(request,'Email already in use!')
                 return redirect('register')
             else:
-                user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
+                user = User.objects.create_superuser(username=username,password=password1,email=email,first_name=first_name,last_name=last_name)
                 user.save()
                 # print('Password Matched!')
                 # messages.info(request,'Password Matched!')
