@@ -1,2 +1,2 @@
-release: python manage.py migrate simple_house accounts djangoproject
+release: python manage.py migrate
 web: gunicorn djangoproject.wsgi --log-file -
