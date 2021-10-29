@@ -57,19 +57,19 @@
 			<div class="row tm-gallery">
 
 				<div id="tm-gallery-page-pizza" class="tm-gallery-page">
-					{% for dish in dishes %}
+					{% for d in dishes %}
 						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 							<figure>
-								<a class="cont" href="dish/{{dish.id}}" style="text-decoration: none; color:black;">
-									<img class='image' src="{{dish.img.url}}" alt="Image"
+								<a class="cont" href="dish/{{d.id}}" style="text-decoration: none; color:black;">
+									<img class='image' src="{{d.img.url}}" alt="Image"
 										class="img-fluid tm-gallery-img" />
-									{% if dish.discount %}
+									{% if d.discount %}
 									<div class="top-left disc">Discount</div>
 									{% endif %}
 									<div>
-										<h4 class="tm-gallery-title">{{dish.name}}</h4>
-										<p class="tm-gallery-description">{{dish.desc}}</p>
-										<p class="tm-gallery-price">${{dish.price}}</p>
+										<h4 class="tm-gallery-title">{{d.name}}</h4>
+										<p class="tm-gallery-description">{{d.desc}}</p>
+										<p class="tm-gallery-price">${{d.price}}</p>
 									</div>
 								</a>
 							</figure>
