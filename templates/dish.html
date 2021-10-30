@@ -22,7 +22,16 @@
             padding: 5px;
             border-radius: 20px;
           }
-          
+          .btn{
+			  padding: 8px 5px;
+			  background-color: white;
+			  border: 1px solid rgb(0, 61, 0);
+			  font-size: 16px;
+			  transition-duration: 0.4s;
+		  }
+		  .btn:hover{
+			  background-color: lightgray;
+		  }
     </style>
 </head>
 
@@ -65,7 +74,7 @@
 
 				<div id="tm-gallery-page-pizza" class="tm-gallery-page" style="padding:20px; min-height:350px;">
 					{% for d in dish %}
-                        <div class="cont" style="display: flex; padding:20px 10vw;" >
+                        <div class="cont" style="display: flex; flex-wrap:wrap; padding:20px 10vw;" >
                             <div class="img">
                                 <img class='image' src="{{d.img.url}}" alt="Image" class="img-fluid tm-gallery-img" />
                             </div>
@@ -78,6 +87,7 @@
                                 {% endif %}
                                 <br><br>
                                 <p class="tm-gallery-price">${{d.price}}</p>
+								<input type="submit" value="Add to Cart" class="btn">
                             </div>
                         </div>
 					{% endfor %}
