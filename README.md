@@ -4,6 +4,9 @@
 
 <p float="left">
   
+  
+  
+  
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
 
@@ -14,6 +17,10 @@
 ### [Django Documentation](https://docs.djangoproject.com/en/3.2/topics/)
 
 </div>
+
+
+
+
 
 
 <details open>
